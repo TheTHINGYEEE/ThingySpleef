@@ -40,8 +40,5 @@ public class SetupCommand extends Command {
 
         player.teleport(g.getGameMap().getWorld().getSpawnLocation());
         player.setFlying(true);
-
-
-
     }
 }

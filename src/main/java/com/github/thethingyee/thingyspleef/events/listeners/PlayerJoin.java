@@ -34,8 +34,11 @@ public class PlayerJoin implements Listener {
         ArrayList<Player> players = event.getGame().getPlayers();
         players.add(event.getPlayer());
 
+        event.getGame().getRemainingPlayers().add(player);
+
         if(players.size() >= 2) event.getGame().setGameState(GameState.STARTING);
 
-        player.sendMessage(ChatColor.GREEN + "You have joined the queue.");
+
+        player.sendMessage(ChatColor.GREEN + "You have joined the queue. (" + players.size() + "/8)");
     }
 }

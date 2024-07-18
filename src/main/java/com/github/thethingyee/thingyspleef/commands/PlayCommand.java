@@ -29,7 +29,17 @@ public class PlayCommand extends Command {
     @Override
     public void execute(Player player, String[] args) {
         if(args.length != 1) {
-            player.sendMessage(ChatColor.RED + "Please specify a map name.");
+            if(getGameManager().getGamesForQueue().isEmpty()) {
+                player.sendMessage(ChatColor.RED + "There are no games to queue into.");
+                player.sendMessage(ChatColor.RED + "Please make a new game by specifying the map name.");
+                return;
+            }
+            Optional<Game> queuedGame = getGameManager().getGamesForQueue().stream().findAny();
+            if(!queuedGame.isPresent()) return;
+            Game g = queuedGame.get();
+
+            Bukkit.getServer().getPluginManager().callEvent(new SpleefJoinLobby(g, player));
+
             return;
         }
 
@@ -40,8 +50,17 @@ public class PlayCommand extends Command {
         }
         Arena arena = opArena.get();
 
-        Game g = getGameManager().newGame(arena);
+        Game g;
+
+        if((g = getActiveQueueGameByArena(arena)) == null) {
+            player.sendMessage(ChatColor.YELLOW + "Creating new game with the map " + arena.getName());
+            g = getGameManager().newGame(arena);
+        }
 
         Bukkit.getServer().getPluginManager().callEvent(new SpleefJoinLobby(g, player));
+    }
+
+    private Game getActiveQueueGameByArena(Arena arena) {
+        return getGameManager().getGamesForQueue().stream().filter(game -> game.getArena().equals(arena)).findFirst().orElse(null);
     }
 }

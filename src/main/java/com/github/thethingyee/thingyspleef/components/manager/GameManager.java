@@ -4,6 +4,7 @@ import com.github.thethingyee.thingyspleef.ThingySpleef;
 import com.github.thethingyee.thingyspleef.components.Arena;
 import com.github.thethingyee.thingyspleef.components.Game;
 import com.github.thethingyee.thingyspleef.components.GameState;
+import com.github.thethingyee.thingyspleef.events.SpleefDeathEvent;
 import com.github.thethingyee.thingyspleef.worldmap.GameMap;
 import com.github.thethingyee.thingyspleef.worldmap.LocalGameMap;
 import org.bukkit.Bukkit;
@@ -40,6 +41,10 @@ public class GameManager {
         return new LocalGameMap(mapsFolder, worldName, true);
     }
 
+    public boolean mapFilesExists(String mapName) {
+        return new File(mapsFolder, mapName).exists();
+    }
+
     public ArenaConfigManager getArenaConfigManager() {
         return arenaConfigManager;
     }
@@ -48,10 +53,20 @@ public class GameManager {
         return activeGames;
     }
 
+    public void leaveGame(Player player, Game game) {
+
+        Bukkit.getPluginManager().callEvent(new SpleefDeathEvent(player, game, true));
+
+    }
+
+    public boolean gameOnQueue(Game game) {
+        return gamesForQueue.contains(game);
+    }
+
     public Game newGame(Arena arena) {
         Game g = new Game(arena, this);
         g.setGameMap(convertWorldToGameMap(arena.getName()));
-        g.setGameState(GameState.STARTING);
+        g.setGameState(GameState.QUEUEING);
         gamesForQueue.add(g);
         activeGames.add(g);
         return g;
@@ -65,6 +80,10 @@ public class GameManager {
         return g;
     }
 
+    public ThingySpleef getThingySpleef() {
+        return thingySpleef;
+    }
+
     public void cleanUp() {
         // remove gamemaps and games
         activeGames.forEach(game -> {
@@ -72,7 +91,6 @@ public class GameManager {
             game.getGameMap().unloadWorld();
         });
     }
-
 
     public File getMapsFolder() {
         return mapsFolder;
@@ -88,7 +106,17 @@ public class GameManager {
 
     public static Optional<Arena> getArenaByWorld(World world) {
         return availableArenas.stream().filter(arena -> arena.getName().equalsIgnoreCase(world.getName())).findFirst();
+    }
 
+    public boolean isPlayingGame(Player player) {
+        return (getGameByPlayer(player) != null);
+    }
+
+    public Game getGameByPlayer(Player player) {
+        for (Game activeGame : activeGames) {
+            if(activeGame.getPlayers().contains(player)) return activeGame;
+        }
+        return null;
     }
 
     public Set<Game> getGamesForQueue() {

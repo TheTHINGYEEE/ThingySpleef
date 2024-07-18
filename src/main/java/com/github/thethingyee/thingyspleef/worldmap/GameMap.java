@@ -9,4 +9,5 @@ public interface GameMap {
 
     boolean isLoaded();
     World getWorld();
+    String getTempWorldName();
 }

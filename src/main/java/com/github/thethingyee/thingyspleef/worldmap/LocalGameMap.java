@@ -1,10 +1,12 @@
 package com.github.thethingyee.thingyspleef.worldmap;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.util.FileUtil;
 
 import java.io.*;
+import java.nio.file.Files;
 
 // Huge thanks to Jordan Osterberg at this part. https://youtu.be/mqoe_9u7qjc
 public class LocalGameMap implements GameMap {
@@ -40,7 +42,7 @@ public class LocalGameMap implements GameMap {
 
         Bukkit.getLogger().info("Unloading world " + tempActive.getName());
 
-        if(world != null) Bukkit.unloadWorld(world, true);
+        if(world != null) Bukkit.unloadWorld(world, false);
         if(tempActive != null) deleteTempDirectory(tempActive);
 
         world = null;
@@ -76,8 +78,8 @@ public class LocalGameMap implements GameMap {
             }
             return;
         }
-        InputStream in = new FileInputStream(source);
-        OutputStream out = new FileOutputStream(dest);
+        InputStream in = Files.newInputStream(source.toPath());
+        OutputStream out = Files.newOutputStream(dest.toPath());
 
         byte[] buffer = new byte[1024];
 
@@ -89,13 +91,20 @@ public class LocalGameMap implements GameMap {
         out.close();
     }
 
+    @Override
+    public String getTempWorldName() {
+        return tempActive.getName();
+    }
+
     private void deleteTempDirectory(File file) {
         if(file.isDirectory()) {
             File[] files = file.listFiles();
             for (File c : files) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Deleting " + c.getName());
                 deleteTempDirectory(c);
             }
         }
+        Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Deleting " + file.getName());
         file.delete();
     }
 }

@@ -3,13 +3,12 @@ package com.github.thethingyee.thingyspleef.components.manager;
 import com.github.thethingyee.thingyspleef.ThingySpleef;
 import com.github.thethingyee.thingyspleef.components.Arena;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ArenaConfigManager {
 
@@ -39,13 +38,21 @@ public class ArenaConfigManager {
 
     public void loadAllArenas() {
         for(String key : config.getConfigurationSection("arenas").getKeys(false)) {
+
+            if(!thingySpleef.getGameManager().mapFilesExists(key)) {
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "The map " + key + " doesn't exist! Skipping...");
+                continue;
+            }
+
             Arena a = new Arena(key);
             int[] i = config.getIntegerList("arenas." + key + ".spawn-location").stream().mapToInt(Integer::intValue).toArray();
             int killZone = config.getInt("arenas." + key + ".kill-zone");
             a.setSpawnLocation(i);
             a.setyKillZone(killZone);
 
-            Bukkit.getLogger().info("Successfully loaded arena " + a.getName());
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Successfully loaded arena " + a.getName());
+
+            // add checks to see if the map folder also exist if not dont initialize and tell the user.
 
             thingySpleef.getGameManager().getAvailableArenas().add(a);
         }

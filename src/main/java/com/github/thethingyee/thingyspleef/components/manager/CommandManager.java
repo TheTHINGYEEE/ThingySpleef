@@ -1,9 +1,8 @@
 package com.github.thethingyee.thingyspleef.components.manager;
 
-import com.github.thethingyee.thingyspleef.commands.setup.SaveCommand;
-import com.github.thethingyee.thingyspleef.commands.setup.SetSpawnCommand;
-import com.github.thethingyee.thingyspleef.commands.setup.SetYKillZoneCommand;
-import com.github.thethingyee.thingyspleef.commands.setup.SetupCommand;
+import com.github.thethingyee.thingyspleef.commands.LeaveCommand;
+import com.github.thethingyee.thingyspleef.commands.PlayCommand;
+import com.github.thethingyee.thingyspleef.commands.setup.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,6 +25,9 @@ public class CommandManager implements CommandExecutor {
         registeredCommands.add(new SetYKillZoneCommand(gameManager));
         registeredCommands.add(new SetSpawnCommand(gameManager));
         registeredCommands.add(new SaveCommand(gameManager));
+        registeredCommands.add(new PlayCommand(gameManager));
+        registeredCommands.add(new ArenaStatusCommand(gameManager));
+        registeredCommands.add(new LeaveCommand(gameManager));
     }
 
     @Override

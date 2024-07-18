@@ -1,34 +1,38 @@
 package com.github.thethingyee.thingyspleef.events;
 
-import com.github.thethingyee.thingyspleef.components.Arena;
 import com.github.thethingyee.thingyspleef.components.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class SpleefJoinLobby extends Event {
-
+public class SpleefDeathEvent extends Event {
     private static final HandlerList HANDLERS_LIST = new HandlerList();
 
-    private final Game game;
     private final Player player;
+    private final Game game;
+    private final boolean playerLeft;
 
-    public SpleefJoinLobby(Game game, Player player) {
-        this.game = game;
+    public SpleefDeathEvent(Player player, Game game, boolean playerLeft) {
         this.player = player;
+        this.game = game;
+        this.playerLeft = playerLeft;
     }
 
-    public Game getGame() {
-       return game;
+    public boolean isPlayerLeft() {
+        return playerLeft;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return HANDLERS_LIST;
     }
 
     public Player getPlayer() {
         return player;
     }
 
-    @Override
-    public HandlerList getHandlers() {
-        return HANDLERS_LIST;
+    public Game getGame() {
+        return game;
     }
 
     public static HandlerList getHandlerList() {
