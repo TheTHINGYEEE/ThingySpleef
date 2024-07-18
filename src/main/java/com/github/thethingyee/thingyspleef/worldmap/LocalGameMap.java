@@ -3,7 +3,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-import org.bukkit.util.FileUtil;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -53,16 +53,6 @@ public class GameManager {
         return activeGames;
     }
 
-    public void leaveGame(Player player, Game game) {
-
-        Bukkit.getPluginManager().callEvent(new SpleefDeathEvent(player, game, true));
-
-    }
-
-    public boolean gameOnQueue(Game game) {
-        return gamesForQueue.contains(game);
-    }
-
     public Game newGame(Arena arena) {
         Game g = new Game(arena, this);
         g.setGameMap(convertWorldToGameMap(arena.getName()));
@@ -102,10 +92,6 @@ public class GameManager {
 
     public static Optional<Arena> getArenaByName(String name) {
         return availableArenas.stream().filter(arena -> arena.getName().equalsIgnoreCase(name)).findFirst();
-    }
-
-    public static Optional<Arena> getArenaByWorld(World world) {
-        return availableArenas.stream().filter(arena -> arena.getName().equalsIgnoreCase(world.getName())).findFirst();
     }
 
     public boolean isPlayingGame(Player player) {

@@ -12,12 +12,10 @@ public class SpleefLeaveEvent extends Event {
 
     private final Player player;
     private final Game game;
-    private final boolean playerQuit;
 
-    public SpleefLeaveEvent(Player player, Game game, boolean playerQuit) {
+    public SpleefLeaveEvent(Player player, Game game) {
         this.player = player;
         this.game = game;
-        this.playerQuit = playerQuit;
     }
 
     @Override
@@ -31,10 +29,6 @@ public class SpleefLeaveEvent extends Event {
 
     public Game getGame() {
         return game;
-    }
-
-    public boolean isPlayerQuit() {
-        return playerQuit;
     }
 
     public static HandlerList getHandlerList() {

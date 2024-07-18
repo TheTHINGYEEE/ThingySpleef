@@ -1,7 +1,6 @@
 package com.github.thethingyee.thingyspleef.events.listeners;
 
 import com.github.thethingyee.thingyspleef.components.GameState;
-import com.github.thethingyee.thingyspleef.components.manager.GameManager;
 import com.github.thethingyee.thingyspleef.events.SpleefDeathEvent;
 import com.github.thethingyee.thingyspleef.events.SpleefLeaveEvent;
 import org.bukkit.Bukkit;

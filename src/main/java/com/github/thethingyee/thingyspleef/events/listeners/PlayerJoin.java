@@ -15,12 +15,6 @@ import java.util.ArrayList;
 
 public class PlayerJoin implements Listener {
 
-    private final GameManager gameManager;
-
-    public PlayerJoin(GameManager gameManager) {
-        this.gameManager = gameManager;
-    }
-
     @EventHandler
     public void onJoinLobby(SpleefJoinLobby event) {
         GameMap gameMap = event.getGame().getGameMap();

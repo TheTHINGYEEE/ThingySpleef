@@ -4,14 +4,8 @@ import com.github.thethingyee.thingyspleef.components.Arena;
 import com.github.thethingyee.thingyspleef.components.Command;
 import com.github.thethingyee.thingyspleef.components.Game;
 import com.github.thethingyee.thingyspleef.components.manager.GameManager;
-import com.github.thethingyee.thingyspleef.worldmap.GameMap;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
 import org.bukkit.entity.Player;
-
-import java.io.File;
 
 public class SetupCommand extends Command {
     public SetupCommand(GameManager gameManager) {

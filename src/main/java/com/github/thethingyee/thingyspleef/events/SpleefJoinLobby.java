@@ -1,6 +1,5 @@
 package com.github.thethingyee.thingyspleef.events;
 
-import com.github.thethingyee.thingyspleef.components.Arena;
 import com.github.thethingyee.thingyspleef.components.Game;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;

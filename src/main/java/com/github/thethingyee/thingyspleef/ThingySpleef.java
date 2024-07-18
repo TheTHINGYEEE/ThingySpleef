@@ -1,7 +1,6 @@
 package com.github.thethingyee.thingyspleef;
 
 import com.github.thethingyee.thingyspleef.components.Game;
-import com.github.thethingyee.thingyspleef.components.manager.ArenaConfigManager;
 import com.github.thethingyee.thingyspleef.components.manager.CommandManager;
 import com.github.thethingyee.thingyspleef.components.manager.GameManager;
 import com.github.thethingyee.thingyspleef.events.listeners.*;

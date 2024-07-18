@@ -1,7 +1,6 @@
 package com.github.thethingyee.thingyspleef.components;
 
 import com.github.thethingyee.thingyspleef.components.manager.GameManager;
-import com.github.thethingyee.thingyspleef.events.SpleefWinEvent;
 import com.github.thethingyee.thingyspleef.worldmap.GameMap;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -65,7 +64,7 @@ public class Game {
 
         switch(gameState) {
             case QUEUEING:
-                if(!gameManager.getGamesForQueue().contains(this)) gameManager.getGamesForQueue().add(this);
+                gameManager.getGamesForQueue().add(this);
 
                 // run checks to see how many players are on the queue
                 // set to starting countdown when 2 or more players have joined the lobby

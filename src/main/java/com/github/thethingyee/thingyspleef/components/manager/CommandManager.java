@@ -14,12 +14,9 @@ import java.util.Set;
 
 public class CommandManager implements CommandExecutor {
 
-    private final GameManager gameManager;
-
-    private Set<com.github.thethingyee.thingyspleef.components.Command> registeredCommands = new HashSet<>();
+    private final Set<com.github.thethingyee.thingyspleef.components.Command> registeredCommands = new HashSet<>();
 
     public CommandManager(GameManager gameManager) {
-        this.gameManager = gameManager;
 
         registeredCommands.add(new SetupCommand(gameManager));
         registeredCommands.add(new SetYKillZoneCommand(gameManager));

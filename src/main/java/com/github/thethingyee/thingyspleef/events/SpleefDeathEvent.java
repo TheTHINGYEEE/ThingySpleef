@@ -10,16 +10,10 @@ public class SpleefDeathEvent extends Event {
 
     private final Player player;
     private final Game game;
-    private final boolean playerLeft;
 
     public SpleefDeathEvent(Player player, Game game, boolean playerLeft) {
         this.player = player;
         this.game = game;
-        this.playerLeft = playerLeft;
-    }
-
-    public boolean isPlayerLeft() {
-        return playerLeft;
     }
 
     @Override
