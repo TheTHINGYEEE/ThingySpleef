@@ -27,7 +27,7 @@ public final class ThingySpleef extends JavaPlugin {
         pm.registerEvents(new ChangeWorld(gameManager), this);
         pm.registerEvents(new GameWin(this), this);
         pm.registerEvents(new PlayerDamage(gameManager), this);
-        pm.registerEvents(new PlayerJoin(gameManager), this);
+        pm.registerEvents(new PlayerJoin(), this);
         pm.registerEvents(new PlayerLeave(gameManager), this);
         pm.registerEvents(new SpleefLeave(), this);
 

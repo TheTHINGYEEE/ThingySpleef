@@ -1,7 +1,6 @@
 package com.github.thethingyee.thingyspleef.events.listeners;
 
 import com.github.thethingyee.thingyspleef.components.GameState;
-import com.github.thethingyee.thingyspleef.components.manager.GameManager;
 import com.github.thethingyee.thingyspleef.events.SpleefJoinLobby;
 import com.github.thethingyee.thingyspleef.worldmap.GameMap;
 import org.bukkit.ChatColor;

@@ -29,7 +29,7 @@ public class LeaveCommand extends Command {
             return;
         }
 
-        Bukkit.getPluginManager().callEvent(new SpleefLeaveEvent(player, getGameManager().getGameByPlayer(player), false));
+        Bukkit.getPluginManager().callEvent(new SpleefLeaveEvent(player, getGameManager().getGameByPlayer(player)));
 
         player.sendMessage(ChatColor.RED + "You have left the game.");
     }

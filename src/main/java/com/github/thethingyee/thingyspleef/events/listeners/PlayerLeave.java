@@ -18,6 +18,6 @@ public class PlayerLeave implements Listener {
     @EventHandler
     public void onLeave(PlayerQuitEvent event) {
         if(!gameManager.isPlayingGame(event.getPlayer())) return;
-        Bukkit.getPluginManager().callEvent(new SpleefLeaveEvent(event.getPlayer(), gameManager.getGameByPlayer(event.getPlayer()), true));
+        Bukkit.getPluginManager().callEvent(new SpleefLeaveEvent(event.getPlayer(), gameManager.getGameByPlayer(event.getPlayer())));
     }
 }
